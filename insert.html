@@ -1,0 +1,350 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Holiday Card</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <style>
+    body {
+        margin-top:45px;
+    }
+    .btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+.tab-content {
+    margin-top:15px;
+    margin-bottom:15px;
+}
+.insert-section, .inserted-section {
+    height:150px;
+}
+#finished {
+    margin-left:100px;
+}
+#preview {
+    margin-top:25px;
+    margin-bottom:45px;
+}
+</style>
+  </head>
+  <body>
+    <div class="container">
+        <div class="row">
+        <div class="col-md-4 insert-section">
+        <div role="tabpanel">
+        
+          <!-- Nav tabs -->
+          <ul class="nav nav-pills" role="tablist">
+            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Upload</a></li>
+            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Insert from URL</a></li>
+          </ul>
+        
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="home">
+                <p><span class="btn btn-default btn-file">Select a photo from your computer<input type="file" id="file-input"></span></p>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="profile">
+                <form class="form-inline" role="form" id="insert-form">
+                <div class="form-group">
+                    <label class="sr-only" for="file-online">Insert from URL</label>
+            <input type="text" id="file-online" name="file-online" class="form-control" placeholder="Image URL">
+            </div>
+            <button id="file-online-submit" type="button" class="btn btn-default">Insert</button>
+            </form>
+            </div>
+          </div>
+        
+        </div>
+    </div>
+    <div class="col-md-6 inserted-section" style="display:none;">
+            <h1>Put that face in there</h1>
+        </div>
+    </div>
+    <div id="image-container"></div>
+    <div class="row">
+    <div class="col-md-8">
+    <img id="finished" src="" style="display:none;">
+    <button name="button" id="preview" type="button" class="btn btn-success btn-lg btn-block">Preview</button>
+    </div></div>
+    </div>
+    <script src="js/kinetic-v5.1.0.min.js"></script>
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script>
+    $(document).ready(function() {
+      function update(activeAnchor) {
+        var group = activeAnchor.getParent();
+
+        var topLeft = group.find('.topLeft')[0];
+        var topRight = group.find('.topRight')[0];
+        var bottomRight = group.find('.bottomRight')[0];
+        var bottomLeft = group.find('.bottomLeft')[0];
+        var image = group.find('.image')[0];
+
+        var anchorX = activeAnchor.x();
+        var anchorY = activeAnchor.y();
+
+        // update anchor positions
+        switch (activeAnchor.name()) {
+          case 'topLeft':
+            topRight.y(anchorY);
+            bottomLeft.x(anchorX);
+            break;
+          case 'topRight':
+            topLeft.y(anchorY);
+            bottomRight.x(anchorX);
+            break;
+          case 'bottomRight':
+            bottomLeft.y(anchorY);
+            topRight.x(anchorX); 
+            break;
+          case 'bottomLeft':
+            bottomRight.y(anchorY);
+            topLeft.x(anchorX); 
+            break;
+        }
+
+        var height = bottomLeft.y() - topLeft.y();
+        var width = topRight.x() - topLeft.x();
+        if(width && height) {
+          image.setSize({width:width, height: height});
+        }
+        
+        image.setPosition(topLeft.getPosition());
+      }
+      function addAnchor(group, x, y, name) {
+        var stage = group.getStage();
+        var layer = group.getLayer();
+
+        var anchor = new Kinetic.Circle({
+          x: x,
+          y: y,
+          stroke: '#666',
+          fill: '#ddd',
+          strokeWidth: 2,
+          radius: 8,
+          name: name,
+          draggable: true,
+          dragOnTop: false
+        });
+
+        anchor.on('dragmove', function() {
+          update(this);
+          layer.draw();
+        });
+        anchor.on('mousedown touchstart', function() {
+          group.setDraggable(false);
+          this.moveToTop();
+        });
+        anchor.on('dragend', function() {
+          group.setDraggable(true);
+          layer.draw();
+        });
+        // add hover styling
+        anchor.on('mouseover', function() {
+          var layer = this.getLayer();
+          document.body.style.cursor = 'pointer';
+          this.setStrokeWidth(4);
+          layer.draw();
+        });
+        anchor.on('mouseout', function() {
+          var layer = this.getLayer();
+          document.body.style.cursor = 'default';
+          this.strokeWidth(2);
+          layer.draw();
+        });
+
+        group.add(anchor);
+      }
+      function loadImages(sources, callback) {
+        var images = {};
+        var loadedImages = 0;
+        var numImages = 0;
+        for(var src in sources) {
+          numImages++;
+        }
+        for(var src in sources) {
+          images[src] = new Image();
+          images[src].onload = function() {
+            if(++loadedImages >= numImages) {
+              callback(images);
+            }
+          };
+          images[src].src = sources[src];
+        }
+      }
+      function initStage(images) {
+        var stage = new Kinetic.Stage({
+          container: 'image-container',
+          width: 980,
+          height: 640
+        });
+        var darthVaderGroup = new Kinetic.Group({
+          x: 0,
+          y: 0,
+          draggable: false
+        });
+        var yodaGroup = new Kinetic.Group({
+          x: 100,
+          y: 110,
+          draggable: true
+        });
+        var layer = new Kinetic.Layer();
+
+        /*
+         * go ahead and add the groups
+         * to the layer and the layer to the
+         * stage so that the groups have knowledge
+         * of its layer and stage
+         */
+        layer.add(darthVaderGroup);
+        layer.add(yodaGroup);
+        stage.add(layer);
+
+        // darth vader
+        var darthVaderImg = new Kinetic.Image({
+          x: 100,
+          y: 0,
+          image: images.darthVader,
+          width: 424,
+          height: 640,
+          name: 'image'
+        });
+
+        darthVaderGroup.add(darthVaderImg);
+
+        $('#preview').on('click', function() {
+          preview();
+        });
+        
+        function preview(){
+            $('.kineticjs-content').fadeOut();
+            $('#finished').fadeIn();
+            darthVaderGroup.moveToTop();
+            yodaGroup.find('.image')[0].opacity(1);
+            yodaGroup.find('.image')[0].cache();
+            yodaGroup.find('.image')[0].filters([Kinetic.Filters.Sepia]);
+            layer.draw();
+            stage.toDataURL({
+                callback: function(dataUrl) {
+                    /*
+                     * here you can do anything you like with the data url.
+                     * In this tutorial we'll just open the url with the browser
+                     * so that you can see the result as an image
+                     */
+                     finished_img = new Image();
+                     finished_img.src = dataUrl;
+                     kImage=new Kinetic.Image({
+                        image:finished_img,
+                        x:0,
+                        y:0,
+                        width: 424,
+                        height: 640,
+                        crop: {
+                            x: 100,
+                            y: 0,
+                            width:424,
+                            height:640
+                        }
+                    });
+                    darthVaderGroup.destroy();
+                    yodaGroup.destroy();
+                    layer.add(kImage);
+                    layer.draw();
+                    stage.toDataURL({
+                    callback: function(FdataUrl) {
+                        $('#finished').attr('src', FdataUrl);
+                    }
+                    });
+                }
+            });
+        }
+
+        stage.draw();
+        
+        function addImage(src){
+            $('.insert-section').fadeOut();
+            $('.inserted-section').fadeIn();
+            var imageObj = new Image();
+            imageObj.setAttribute('crossOrigin', 'anonymous');
+            imageObj.onload = function() {
+                var yodaImg = new Kinetic.Image({
+                  x: 0,
+                  y: 0,
+                  image: imageObj,
+                  opacity: 0.5,
+                  name: 'image'
+                });
+                if(yodaImg.getHeight() > 500) {
+    	            newHeight = 500;
+    	            newWidth = yodaImg.getWidth() * newHeight / yodaImg.getHeight();
+    	            yodaImg.setSize({width:newWidth, height: newHeight});
+                }
+                yodaGroup.add(yodaImg);
+                addAnchor(yodaGroup, 0, 0, 'topLeft');
+                addAnchor(yodaGroup, yodaImg.getWidth(), 0, 'topRight');
+                addAnchor(yodaGroup, yodaImg.getWidth(), yodaImg.getHeight(), 'bottomRight');
+                addAnchor(yodaGroup, 0, yodaImg.getHeight(), 'bottomLeft');
+                    
+                yodaGroup.on('dragstart', function() {
+                    yodaImg.opacity(0.5);
+                    layer.draw();
+                    this.moveToTop();
+                });
+            
+                layer.draw();
+                stage.draw();
+            }  
+
+            imageObj.src = src;
+        }
+      
+        $('#file-input').change(function(e) {
+      	    var f = document.getElementById('file-input').files[0];
+            var name = f.name;
+            var url = window.URL;
+            var src = url.createObjectURL(f);
+      	    addImage(src);
+      });
+      
+      $('#file-online-submit').on('click', function() {
+      	var src = $('#file-online').val();
+        addImage(src);
+    });
+    $('#insert-form').on('submit', function (e) {
+  e.preventDefault();
+})
+  
+      }
+
+      var sources = {
+        darthVader: 'images/catlady.png',
+        yoda: 'face.png'
+      };
+      loadImages(sources, initStage);
+      
+});
+    </script>
+  <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>      
