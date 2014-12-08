@@ -99,7 +99,6 @@ $(document).ready(function() {
         var yodaGroup = new Kinetic.Group({
           x: 10,
           y: 110,
-          opacity: 0.5,
           draggable: true
         });
         var layer = new Kinetic.Layer();
@@ -116,11 +115,15 @@ $(document).ready(function() {
         
         //addBackground('/dev/annie/jibjab/images/sled.png');
 
-        $('#preview').on('click', function() {
+        $('.inserted-section').on('click', '.preview', function() {
+            $(this).removeClass('preview').addClass('unpreview');
+            $(this).text('Edit');
           preview();
         });
         
-        $('#unpreview').on('click', function() {
+        $('.inserted-section').on('click', '.unpreview', function() {
+            $(this).addClass('preview').removeClass('unpreview');
+            $(this).text('Preview');
           unpreview();
         });
         
@@ -132,7 +135,7 @@ $(document).ready(function() {
             $('.kineticjs-content').fadeOut();
             $('#finished').fadeIn();
             darthVaderGroup.moveToTop();
-            yodaGroup.opacity(1);
+            yodaGroup.find('.image')[0].opacity(1);
             var backgroundImage = darthVaderGroup.find('.image')[0];
             console.log(backgroundImage.getWidth())
             yodaGroup.find('.image')[0].cache();
@@ -182,13 +185,13 @@ $(document).ready(function() {
         
         function preview(){
             darthVaderGroup.moveToTop();
-            yodaGroup.opacity(1);
+            yodaGroup.find('.image')[0].opacity(1);
             layer.draw();
         }
         
         function unpreview(){
             yodaGroup.moveToTop();
-            yodaGroup.opacity(0.5);
+            yodaGroup.find('.image')[0].opacity(0.5);
             layer.draw();
         }
 
@@ -225,7 +228,7 @@ $(document).ready(function() {
                   x: 0,
                   y: 0,
                   image: imageObj,
-                  //opacity: 0.5,
+                  opacity: 0.5,
                   name: 'image'
                 });
                 if(yodaImg.getHeight() > 500) {

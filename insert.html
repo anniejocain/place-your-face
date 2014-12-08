@@ -12,6 +12,16 @@
     body {
         margin-top:45px;
     }
+    .btn, input {
+        border-radius:2px;
+    }
+    .btn-primary {
+        background-color:#4AA4BE;
+        border-color:#135DA6;
+    }
+    .btn-primary:hover {
+        background-color:#135DA6;
+    }
     .btn-file {
     position: relative;
     overflow: hidden;
@@ -31,14 +41,13 @@
     cursor: inherit;
     display: block;
 }
-.tab-content {
-    margin-top:15px;
-    margin-bottom:15px;
+h1, h2 {
+    color:#2C3135;
 }
 .row {
     margin-bottom:45px;
 }
-#preview, #unpreview {
+.preview, .unpreview {
     margin-top:25px;
 }
 #finished {
@@ -52,14 +61,16 @@
     margin-top:25px;
 }
 .choose-background.chosen {
-    border:2px solid #D9434F;
+    border:2px solid #4AA4BE;
     border-radius:2px;
+    background-color:#D5D3D4;
 }
 .badge-step {
     font-size:24px;
     border-radius:24px;
     width:48px;
-    background-color:#D9434F;
+    padding:12px;
+    background-color:#4AA4BE;
 }
 </style>
   </head>
@@ -67,25 +78,28 @@
     <div class="container">
         <div class="row background-options">
             <h2><span class="badge badge-step">1</span> Choose your background</h2>
-            <div class="col-md-4">
-            <button type="button" class="btn btn-link choose-background" data-color="grayscale" data-src="images/sled.png"><img src="images/sled_thumb.jpg"><br>Sled</button>
+            <div class="col-md-3">
+            <button type="button" class="btn btn-link choose-background" data-color="grayscale" data-src="images/sled.png"><img src="images/sled_thumb.jpg"></button>
             </div>
-            <div class="col-md-4">
-            <button type="button" class="btn btn-link choose-background" data-color="sepia" data-src="images/catlady.png"><img src="images/catlady_thumb.jpg"><br>Cat lady</button>
+            <div class="col-md-3">
+            <button type="button" class="btn btn-link choose-background" data-color="sepia" data-src="images/catlady.png"><img src="images/catlady_thumb.jpg"></button>
             </div>
-            <div class="col-md-4">
-            <button type="button" class="btn btn-link choose-background" data-color="sepia" data-src="images/catlady.png"><img src="images/catlady_thumb.jpg"><br>Cat lady</button>
+            <div class="col-md-3">
+            <button type="button" class="btn btn-link choose-background" data-color="sepia" data-src="images/baby.png"><img src="images/baby_thumb.jpg"></button>
+            </div>
+            <div class="col-md-3">
+            <button type="button" class="btn btn-link choose-background" data-color="sepia" data-src="images/soldier.png"><img src="images/soldier_thumb.jpg"></button>
             </div>
         </div>
         <div class="row background-options">
             <div class="col-md-4">
-            <button type="button" class="btn btn-link choose-background" data-color="grayscale" data-src="images/sled.png"><img src="images/sled_thumb.jpg"><br>Sled</button>
+            <button type="button" class="btn btn-link choose-background" data-color="sepia" data-src="images/holmes.png"><img src="images/holmes_thumb.jpg"></button>
             </div>
             <div class="col-md-4">
-            <button type="button" class="btn btn-link choose-background" data-color="sepia" data-src="images/catlady.png"><img src="images/catlady_thumb.jpg"><br>Cat lady</button>
+            <button type="button" class="btn btn-link choose-background" data-color="sepia" data-src="images/cat_close.png"><img src="images/cat_close_thumb.jpg"></button>
             </div>
             <div class="col-md-4">
-            <button type="button" class="btn btn-link choose-background" data-color="sepia" data-src="images/catlady.png"><img src="images/catlady_thumb.jpg"><br>Cat lady</button>
+            <button type="button" class="btn btn-link choose-background" data-color="grayscale" data-src="images/baseball.png"><img src="images/baseball_thumb.jpg"></button>
             </div>
         </div>
         <div class="row insert-face">
@@ -110,9 +124,8 @@
           </div>
     <div class="row place-face">
     <h2><span class="badge badge-step">3</span> Place your face in the opening</h2>
-    <div class="col-md-7 inserted-section">
-            <button name="button" id="preview" type="button" class="btn btn-success btn-lg">Preview</button>
-    <button name="button" id="unpreview" type="button" class="btn btn-success btn-lg">UnPreview</button>
+    <div class="col-md-7 col-md-offset-2 inserted-section">
+            <button name="button" type="button" class="btn btn-primary preview">Preview</button>
         </div>
     </div>
     <div id="image-container"></div>
