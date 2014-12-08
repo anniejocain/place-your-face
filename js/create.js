@@ -97,7 +97,7 @@ $(document).ready(function() {
           draggable: false
         });
         var yodaGroup = new Kinetic.Group({
-          x: 100,
+          x: 10,
           y: 110,
           opacity: 0.5,
           draggable: true
@@ -120,12 +120,21 @@ $(document).ready(function() {
           preview();
         });
         
-        function preview(){
-            //$('.kineticjs-content').fadeOut();
-            //$('#finished').fadeIn();
+        $('#unpreview').on('click', function() {
+          unpreview();
+        });
+        
+        $('#finish').on('click', function() {
+          finish();
+        });
+        
+        function finish(){
+            $('.kineticjs-content').fadeOut();
+            $('#finished').fadeIn();
             darthVaderGroup.moveToTop();
             yodaGroup.opacity(1);
-            console.log(backgroundColor);
+            var backgroundImage = darthVaderGroup.find('.image')[0];
+            console.log(backgroundImage.getWidth())
             yodaGroup.find('.image')[0].cache();
             if(backgroundColor === 'sepia') {
                 yodaGroup.find('.image')[0].filters([Kinetic.Filters.Sepia]);
@@ -145,15 +154,15 @@ $(document).ready(function() {
                      finished_img.onload = function() {
                      kImage=new Kinetic.Image({
                         image:finished_img,
-                        x:0,
+                        x:100,
                         y:0,
-                        width: 424,
-                        height: 640,
+                        width: backgroundImage.getWidth(),
+                        height: backgroundImage.getHeight(),
                         crop: {
                             x: 100,
                             y: 0,
-                            width:424,
-                            height:640
+                            width:backgroundImage.getWidth(),
+                            height:backgroundImage.getHeight()
                         }
                     });
                     darthVaderGroup.destroy();
@@ -170,31 +179,45 @@ $(document).ready(function() {
                 }
             });
         }
+        
+        function preview(){
+            darthVaderGroup.moveToTop();
+            yodaGroup.opacity(1);
+            layer.draw();
+        }
+        
+        function unpreview(){
+            yodaGroup.moveToTop();
+            yodaGroup.opacity(0.5);
+            layer.draw();
+        }
 
         stage.draw();
         
         function addBackground(src) {
+            darthVaderGroup.removeChildren();
             var background = new Image();
-            background.src= src;
+            background.onload = function() {
             
             // darth vader
             var darthVaderImg = new Kinetic.Image({
               x: 100,
               y: 0,
               image: background,
-              width: 424,
-              height: 640,
               name: 'image'
             });
-    
             darthVaderGroup.add(darthVaderImg);
             layer.draw();
             stage.draw();
+            }
+            background.src= src;
         }
         
         function addImage(src){
-            $('.insert-section').fadeOut();
-            $('.inserted-section').fadeIn();
+            //$('.insert-section').fadeOut();
+            //$('.inserted-section').fadeIn();
+            $.scrollTo('.place-face', 800);
+            yodaGroup.removeChildren();
             var imageObj = new Image();
             imageObj.setAttribute('crossOrigin', 'anonymous');
             imageObj.onload = function() {
@@ -229,7 +252,9 @@ $(document).ready(function() {
         }
         
         $('.choose-background').on('click', function() {
-            console.log('clicked');
+            $('.choose-background').removeClass('chosen');
+            $(this).addClass('chosen');
+            $.scrollTo('.insert-face', 800);
             var src = $(this).data('src');
             backgroundColor = $(this).data('color');
             addBackground(src);

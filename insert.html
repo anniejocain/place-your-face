@@ -35,67 +35,96 @@
     margin-top:15px;
     margin-bottom:15px;
 }
-.insert-section, .inserted-section {
-    height:150px;
+.row {
+    margin-bottom:45px;
+}
+#preview, #unpreview {
+    margin-top:25px;
 }
 #finished {
     margin-left:100px;
 }
-#preview {
+#finish {
     margin-top:25px;
     margin-bottom:45px;
+}
+.background-options div {
+    margin-top:25px;
+}
+.choose-background.chosen {
+    border:2px solid #D9434F;
+    border-radius:2px;
+}
+.badge-step {
+    font-size:24px;
+    border-radius:24px;
+    width:48px;
+    background-color:#D9434F;
 }
 </style>
   </head>
   <body>
     <div class="container">
-        <div class="row">
+        <div class="row background-options">
+            <h2><span class="badge badge-step">1</span> Choose your background</h2>
             <div class="col-md-4">
-            <button type="button" class="btn btn-link choose-background" data-color="grayscale" data-src="/dev/annie/jibjab/images/sled.png">Sled</button>
-            <button type="button" class="btn btn-link choose-background" data-color="sepia" data-src="/dev/annie/jibjab/images/catlady.png">Cat lady</button>
+            <button type="button" class="btn btn-link choose-background" data-color="grayscale" data-src="images/sled.png"><img src="images/sled_thumb.jpg"><br>Sled</button>
+            </div>
+            <div class="col-md-4">
+            <button type="button" class="btn btn-link choose-background" data-color="sepia" data-src="images/catlady.png"><img src="images/catlady_thumb.jpg"><br>Cat lady</button>
+            </div>
+            <div class="col-md-4">
+            <button type="button" class="btn btn-link choose-background" data-color="sepia" data-src="images/catlady.png"><img src="images/catlady_thumb.jpg"><br>Cat lady</button>
             </div>
         </div>
-        <div class="row">
-        <div class="col-md-4 insert-section">
-        <div role="tabpanel">
-        
-          <!-- Nav tabs -->
-          <ul class="nav nav-pills" role="tablist">
-            <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Upload</a></li>
-            <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Insert from URL</a></li>
-          </ul>
-        
-          <!-- Tab panes -->
-          <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="home">
-                <p><span class="btn btn-default btn-file">Select a photo from your computer<input type="file" id="file-input"></span></p>
+        <div class="row background-options">
+            <div class="col-md-4">
+            <button type="button" class="btn btn-link choose-background" data-color="grayscale" data-src="images/sled.png"><img src="images/sled_thumb.jpg"><br>Sled</button>
             </div>
-            <div role="tabpanel" class="tab-pane" id="profile">
+            <div class="col-md-4">
+            <button type="button" class="btn btn-link choose-background" data-color="sepia" data-src="images/catlady.png"><img src="images/catlady_thumb.jpg"><br>Cat lady</button>
+            </div>
+            <div class="col-md-4">
+            <button type="button" class="btn btn-link choose-background" data-color="sepia" data-src="images/catlady.png"><img src="images/catlady_thumb.jpg"><br>Cat lady</button>
+            </div>
+        </div>
+        <div class="row insert-face">
+        <h2><span class="badge badge-step">2</span> Insert your photo</h2>
+        <div class="col-md-4">
+        <h3>Upload</h3>
+        <p><span class="btn btn-primary btn-file">Select a photo from your computer<input type="file" id="file-input"></span></p>
+        </div>
+        <div class="col-md-2">
+        <h1>OR</h1>
+        </div>
+        <div class="col-md-4">
+        <h3>Insert from URL</h3>
                 <form class="form-inline" role="form" id="insert-form">
                 <div class="form-group">
                     <label class="sr-only" for="file-online">Insert from URL</label>
             <input type="text" id="file-online" name="file-online" class="form-control" placeholder="Image URL">
             </div>
-            <button id="file-online-submit" type="button" class="btn btn-default">Insert</button>
+            <button id="file-online-submit" type="button" class="btn btn-primary">Insert</button>
             </form>
             </div>
           </div>
-        
-        </div>
-    </div>
-    <div class="col-md-6 inserted-section" style="display:none;">
-            <h1>Put that face in there</h1>
+    <div class="row place-face">
+    <h2><span class="badge badge-step">3</span> Place your face in the opening</h2>
+    <div class="col-md-7 inserted-section">
+            <button name="button" id="preview" type="button" class="btn btn-success btn-lg">Preview</button>
+    <button name="button" id="unpreview" type="button" class="btn btn-success btn-lg">UnPreview</button>
         </div>
     </div>
     <div id="image-container"></div>
     <div class="row">
     <div class="col-md-8">
     <img id="finished" src="" style="display:none;">
-    <button name="button" id="preview" type="button" class="btn btn-success btn-lg btn-block">Preview</button>
+    <button name="button" id="finish" type="button" class="btn btn-success btn-lg btn-block">Finish</button>
     </div></div>
     </div>
     <script src="js/kinetic-v5.1.0.min.js"></script>
     <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/jquery.scrollTo.js"></script>
     <script src="js/create.js"></script>
   <script src="js/bootstrap.min.js"></script>
   </body>
