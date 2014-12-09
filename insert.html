@@ -17,10 +17,10 @@
     }
     .btn-primary {
         background-color:#4AA4BE;
-        border-color:#135DA6;
+        border-color:#4AA4BE;
     }
     .btn-primary:hover {
-        background-color:#135DA6;
+        background-color:#4AA4BE;
     }
     .btn-file {
     position: relative;
@@ -48,14 +48,12 @@ h1, h2 {
     margin-bottom:45px;
 }
 .preview, .unpreview {
-    margin-top:25px;
+    width:150px;
+    margin-right:25px;
 }
-#finished {
-    margin-left:100px;
-}
-#finish {
-    margin-top:25px;
+.text-center {
     margin-bottom:45px;
+    color:#666;
 }
 .background-options div {
     margin-top:25px;
@@ -63,7 +61,25 @@ h1, h2 {
 .choose-background.chosen {
     border:2px solid #4AA4BE;
     border-radius:2px;
-    background-color:#D5D3D4;
+    text-decoration:none;
+}
+.choose-background img {
+    margin-bottom:8px;
+}
+.choose-background .glyphicon {
+    display:block;
+    font-size:32px;
+    text-decoration:none;
+}
+.choose-background:hover {
+    color:#fff;
+    text-decoration:none;
+}
+.choose-background {
+    color:#fff;
+}
+.choose-background.chosen {
+    color:#4AA4BE;
 }
 .badge-step {
     font-size:24px;
@@ -76,30 +92,36 @@ h1, h2 {
   </head>
   <body>
     <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h1>Place your face</h1>
+                <p class="lead">Choose an image from the Harvard Library digital archives. Put yourself in it. Laugh a little. Send it to a friend for the holidays.</p>
+            </div>
+        </div>
         <div class="row background-options">
             <h2><span class="badge badge-step">1</span> Choose your background</h2>
             <div class="col-md-3">
-            <button type="button" class="btn btn-link choose-background" data-color="grayscale" data-src="images/sled.png"><img src="images/sled_thumb.jpg"></button>
+            <button type="button" class="btn btn-link choose-background" data-color="grayscale" data-src="images/sled.png" data-attribution="Schlesinger Library on the History of Women in America" data-link="https://www.flickr.com/photos/schlesinger_library/15341437702/"><img src="images/sled_thumb.jpg"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></button>
             </div>
             <div class="col-md-3">
-            <button type="button" class="btn btn-link choose-background" data-color="sepia" data-src="images/catlady.png"><img src="images/catlady_thumb.jpg"></button>
+            <button type="button" class="btn btn-link choose-background" data-color="sepia" data-src="images/catlady.png" data-link="https://www.flickr.com/photos/schlesinger_library/15054903733/" data-attribution="Schlesinger Library on the History of Women in America" ><img src="images/catlady_thumb.jpg"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></button>
             </div>
             <div class="col-md-3">
-            <button type="button" class="btn btn-link choose-background" data-color="sepia" data-src="images/baby.png"><img src="images/baby_thumb.jpg"></button>
+            <button type="button" class="btn btn-link choose-background" data-color="sepia" data-src="images/baby.png" data-link="https://www.flickr.com/photos/schlesinger_library/14827604012/" data-attribution="Schlesinger Library on the History of Women in America"><img src="images/baby_thumb.jpg"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></button>
             </div>
             <div class="col-md-3">
-            <button type="button" class="btn btn-link choose-background" data-color="sepia" data-src="images/soldier.png"><img src="images/soldier_thumb.jpg"></button>
+            <button type="button" class="btn btn-link choose-background" data-color="sepia" data-src="images/soldier.png" data-link="http://archives.lib.state.ma.us/2452/216819" data-attribution="The State Library of Massachusetts"><img src="images/soldier_thumb.jpg"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></button>
             </div>
         </div>
         <div class="row background-options">
             <div class="col-md-4">
-            <button type="button" class="btn btn-link choose-background" data-color="sepia" data-src="images/holmes.png"><img src="images/holmes_thumb.jpg"></button>
+            <button type="button" class="btn btn-link choose-background" data-color="sepia" data-src="images/holmes.png"><img src="images/holmes_thumb.jpg"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></button>
             </div>
             <div class="col-md-4">
-            <button type="button" class="btn btn-link choose-background" data-color="sepia" data-src="images/cat_close.png"><img src="images/cat_close_thumb.jpg"></button>
+            <button type="button" class="btn btn-link choose-background" data-color="sepia" data-src="images/cat_close.png" data-attribution="Schlesinger Library on the History of Women in America" data-link="https://www.flickr.com/photos/schlesinger_library/15337483446/"><img src="images/cat_close_thumb.jpg"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></button>
             </div>
             <div class="col-md-4">
-            <button type="button" class="btn btn-link choose-background" data-color="grayscale" data-src="images/baseball.png"><img src="images/baseball_thumb.jpg"></button>
+            <button type="button" class="btn btn-link choose-background" data-color="grayscale" data-attribution="Schlesinger Library on the History of Women in America" data-src="images/baseball.png" data-link="https://www.flickr.com/photos/schlesinger_library/9497218122/"><img src="images/baseball_thumb.jpg"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></button>
             </div>
         </div>
         <div class="row insert-face">
@@ -124,16 +146,38 @@ h1, h2 {
           </div>
     <div class="row place-face">
     <h2><span class="badge badge-step">3</span> Place your face in the opening</h2>
-    <div class="col-md-7 col-md-offset-2 inserted-section">
-            <button name="button" type="button" class="btn btn-primary preview">Preview</button>
-        </div>
     </div>
     <div id="image-container"></div>
     <div class="row">
-    <div class="col-md-8">
-    <img id="finished" src="" style="display:none;">
-    <button name="button" id="finish" type="button" class="btn btn-success btn-lg btn-block">Finish</button>
+    <div class="col-md-10 inserted-section">
+    <p class="text-center"><button name="button" type="button" class="btn btn-lg btn-primary preview">Preview</button> <button name="button" id="finish" type="button" class="btn btn-primary btn-lg">Save and finish</button> (you can no longer edit your image after you save)</p>
     </div></div>
+    <div class="row write-message" style="display:none;">
+        <h2><span class="badge badge-step">4</span> Write a message and address the card</h2>
+        <div class="col-md-12">
+        <div style="border:1px solid #4AA4BE;padding:15px;position:relative;float:left;margin-top:25px;">
+        <div style="position:relative;float:left;margin-right:15px;">
+        <img id="finished" src="">
+        <p style="margin-top:7px;color:#666;max-width:400px;">This image is from <a href="#" class="attribution-link"></a></p>
+        </div>
+        <form role="form" style="color:#333;float:right;margin-right:15px;width:300px;">
+  <div class="form-group">
+    <label for="fromEmail">Your email</label>
+    <input type="email" class="form-control" id="fromEmail" placeholder="Enter email">
+  </div>
+<div class="form-group">
+    <label for="toEmail">Recipient email</label>
+    <input type="email" class="form-control" id="toEmail" placeholder="Enter email">
+  </div>
+  <div class="form-group">
+  <label for="messageText">Message</label>
+  <textarea class="form-control" rows="3" id="messageText"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary btn-block">Send</button>
+</form>
+        </div>
+        </div>
+    </div>
     </div>
     <script src="js/kinetic-v5.1.0.min.js"></script>
     <script src="js/jquery-1.11.1.min.js"></script>

@@ -117,7 +117,7 @@ $(document).ready(function() {
 
         $('.inserted-section').on('click', '.preview', function() {
             $(this).removeClass('preview').addClass('unpreview');
-            $(this).text('Edit');
+            $(this).text('Back to edit');
           preview();
         });
         
@@ -132,8 +132,8 @@ $(document).ready(function() {
         });
         
         function finish(){
-            $('.kineticjs-content').fadeOut();
-            $('#finished').fadeIn();
+            //$('.kineticjs-content').fadeOut();
+            //$('#finished').fadeIn();
             darthVaderGroup.moveToTop();
             yodaGroup.find('.image')[0].opacity(1);
             var backgroundImage = darthVaderGroup.find('.image')[0];
@@ -157,7 +157,7 @@ $(document).ready(function() {
                      finished_img.onload = function() {
                      kImage=new Kinetic.Image({
                         image:finished_img,
-                        x:100,
+                        x:0,
                         y:0,
                         width: backgroundImage.getWidth(),
                         height: backgroundImage.getHeight(),
@@ -172,6 +172,8 @@ $(document).ready(function() {
                     yodaGroup.destroy();
                     layer.add(kImage);
                     layer.draw();
+                    stage.setAttr('width', backgroundImage.getWidth());
+                    stage.setAttr('height', backgroundImage.getHeight());
                     stage.toDataURL({
                     callback: function(FdataUrl) {
                         $('#finished').attr('src', FdataUrl);
@@ -179,17 +181,21 @@ $(document).ready(function() {
                     });
                     }
                     finished_img.src = dataUrl;
+                    $('.write-message').fadeIn();
+                    $.scrollTo('.write-message', 800);
                 }
             });
         }
         
         function preview(){
+            darthVaderGroup.find('.preview').show();
             darthVaderGroup.moveToTop();
             yodaGroup.find('.image')[0].opacity(1);
             layer.draw();
         }
         
         function unpreview(){
+            darthVaderGroup.find('.preview').hide();
             yodaGroup.moveToTop();
             yodaGroup.find('.image')[0].opacity(0.5);
             layer.draw();
@@ -212,6 +218,39 @@ $(document).ready(function() {
             darthVaderGroup.add(darthVaderImg);
             layer.draw();
             stage.draw();
+            var backgroundImage = darthVaderGroup.find('.image')[0];
+            var rect = new Kinetic.Rect({
+                x: 0,
+                y: 0,
+                width: 100,
+                height: backgroundImage.getHeight(),
+                strokeEnabled: false,
+                fill: '#fff',
+                name: 'preview'
+              });
+              var rect2 = new Kinetic.Rect({
+                x: backgroundImage.getWidth() + 100,
+                y: 0,
+                width: 880 - backgroundImage.getWidth(),
+                height: backgroundImage.getHeight(),
+                strokeEnabled: false,
+                fill: '#fff',
+                name: 'preview'
+              });
+              var rect3 = new Kinetic.Rect({
+                x: 0,
+                y: backgroundImage.getHeight(),
+                width: 980,
+                height: 600 - backgroundImage.getHeight(),
+                strokeEnabled: false,
+                fill: '#fff',
+                name: 'preview'
+              });
+              
+              darthVaderGroup.add(rect);
+              darthVaderGroup.add(rect2);
+              darthVaderGroup.add(rect3);
+              darthVaderGroup.find('.preview').hide();
             }
             background.src= src;
         }
@@ -259,6 +298,8 @@ $(document).ready(function() {
             $(this).addClass('chosen');
             $.scrollTo('.insert-face', 800);
             var src = $(this).data('src');
+            $('.attribution-link').text($(this).data('attribution'));
+            $('.attribution-link').attr('href', $(this).data('link'));
             backgroundColor = $(this).data('color');
             addBackground(src);
         });
