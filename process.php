@@ -11,245 +11,879 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // message
         $message = "
-            <!-- ***************************************************
-            ********************************************************
-
-            HOW TO USE: Use these code examples as a guideline for formatting your HTML email. You may want to create your own template based on these snippets or just pick and choose the ones that fix your specific rendering issue(s). There are two main areas in the template: 1. The header (head) area of the document. You will find global styles, where indicated, to move inline. 2. The body section contains more specific fixes and guidance to use where needed in your design.
-
-            DO NOT COPY OVER COMMENTS AND INSTRUCTIONS WITH THE CODE to your message or risk spam box banishment :).
-
-            It is important to note that sometimes the styles in the header area should not be or don't need to be brought inline. Those instances will be marked accordingly in the comments.
-
-            ********************************************************
-            **************************************************** -->
-
-            <!-- Using the xHTML doctype is a good practice when sending HTML email. While not the only doctype you can use, it seems to have the least inconsistencies. For more information on which one may work best for you, check out the resources below.
-
-            UPDATED: Now using xHTML strict based on the fact that gmail and hotmail uses it.  Find out more about that, and another great boilerplate, here: http://www.emailology.org/#1
-
-            More info/Reference on doctypes in email:
-            Campaign Monitor - http://www.campaignmonitor.com/blog/post/3317/correct-doctype-to-use-in-html-email/
-            Email on Acid - http://www.emailonacid.com/blog/details/C18/doctype_-_the_black_sheep_of_html_email_design
-            -->
-
             <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
-
             <html xmlns='http://www.w3.org/1999/xhtml'>
             <head>
             	<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
-            	<meta name='viewport' content='width=device-width, initial-scale=1.0'/>
-            	<title>Your Message Subject or Title</title>
-            	<style type='text/css'>
-
-            		/***********
-            		Originally based on The MailChimp Reset from Fabio Carneiro, MailChimp User Experience Design
-            		More info and templates on Github: https://github.com/mailchimp/Email-Blueprints
-            		http://www.mailchimp.com &amp; http://www.fabio-carneiro.com
-
-            		INLINE: Yes.
-            		***********/
-            		/* Client-specific Styles */
-            		#outlook a {padding:0;} /* Force Outlook to provide a 'view in browser' menu link. */
-            		body{width:100% !important; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; margin:0; padding:0;}
-            		/* Prevent Webkit and Windows Mobile platforms from changing default font sizes, while not breaking desktop design. */
-            		.ExternalClass {width:100%;} /* Force Hotmail to display emails at full width */
-            		.ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {line-height: 100%;} /* Force Hotmail to display normal line spacing.  More on that: http://www.emailonacid.com/forum/viewthread/43/ */
-            		#backgroundTable {margin:0; padding:0; width:100% !important; line-height: 100% !important;}
-            		/* End reset */
-
-            		/* Some sensible defaults for images
-            		1. '-ms-interpolation-mode: bicubic' works to help ie properly resize images in IE. (if you are resizing them using the width and height attributes)
-            		2. 'border:none' removes border when linking images.
-            		3. Updated the common Gmail/Hotmail image display fix: Gmail and Hotmail unwantedly adds in an extra space below images when using non IE browsers. You may not always want all of your images to be block elements. Apply the 'image_fix' class to any image you need to fix.
-
-            		Bring inline: Yes.
-            		*/
-            		img {outline:none; text-decoration:none; -ms-interpolation-mode: bicubic;}
-            		a img {border:none;}
-            		.image_fix {display:block;}
-
-            		/** Yahoo paragraph fix: removes the proper spacing or the paragraph (p) tag. To correct we set the top/bottom margin to 1em in the head of the document. Simple fix with little effect on other styling. NOTE: It is also common to use two breaks instead of the paragraph tag but I think this way is cleaner and more semantic. NOTE: This example recommends 1em. More info on setting web defaults: http://www.w3.org/TR/CSS21/sample.html or http://meiert.com/en/blog/20070922/user-agent-style-sheets/
-
-            		Bring inline: Yes.
-            		**/
-            		p {margin: 1em 0;}
-
-            		/** Hotmail header color reset: Hotmail replaces your header color styles with a green color on H2, H3, H4, H5, and H6 tags. In this example, the color is reset to black for a non-linked header, blue for a linked header, red for an active header (limited support), and purple for a visited header (limited support).  Replace with your choice of color. The !important is really what is overriding Hotmail's styling. Hotmail also sets the H1 and H2 tags to the same size.
-
-            		Bring inline: Yes.
-            		**/
-            		h1, h2, h3, h4, h5, h6 {color: black !important;}
-
-            		h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {color: blue !important;}
-
-            		h1 a:active, h2 a:active,  h3 a:active, h4 a:active, h5 a:active, h6 a:active {
-            			color: red !important; /* Preferably not the same color as the normal header link color.  There is limited support for psuedo classes in email clients, this was added just for good measure. */
-            		 }
-
-            		h1 a:visited, h2 a:visited,  h3 a:visited, h4 a:visited, h5 a:visited, h6 a:visited {
-            			color: purple !important; /* Preferably not the same color as the normal header link color. There is limited support for psuedo classes in email clients, this was added just for good measure. */
-            		}
-
-            		/** Outlook 07, 10 Padding issue: These 'newer' versions of Outlook add some padding around table cells potentially throwing off your perfectly pixeled table.  The issue can cause added space and also throw off borders completely.  Use this fix in your header or inline to safely fix your table woes.
-
-            		More info: http://www.ianhoar.com/2008/04/29/outlook-2007-borders-and-1px-padding-on-table-cells/
-            		http://www.campaignmonitor.com/blog/post/3392/1px-borders-padding-on-table-cells-in-outlook-07/
-
-            		H/T @edmelly
-
-            		Bring inline: No.
-            		**/
-            		table td {border-collapse: collapse;}
-
-            		/** Remove spacing around Outlook 07, 10 tables
-
-            		More info : http://www.campaignmonitor.com/blog/post/3694/removing-spacing-from-around-tables-in-outlook-2007-and-2010/
-
-            		Bring inline: Yes
-            		**/
-            		table { border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; }
-
-            		/* Styling your links has become much simpler with the new Yahoo.  In fact, it falls in line with the main credo of styling in email, bring your styles inline.  Your link colors will be uniform across clients when brought inline.
-
-            		Bring inline: Yes. */
-            		a {color: orange;}
-
-            		/* Or to go the gold star route...
-            		a:link { color: orange; }
-            		a:visited { color: blue; }
-            		a:hover { color: green; }
-            		*/
-
-            		/***************************************************
-            		****************************************************
-            		MOBILE TARGETING
-
-            		Use @media queries with care.  You should not bring these styles inline -- so it's recommended to apply them AFTER you bring the other stlying inline.
-
-            		Note: test carefully with Yahoo.
-            		Note 2: Don't bring anything below this line inline.
-            		****************************************************
-            		***************************************************/
-
-            		/* NOTE: To properly use @media queries and play nice with yahoo mail, use attribute selectors in place of class, id declarations.
-            		table[class=classname]
-            		Read more: http://www.campaignmonitor.com/blog/post/3457/media-query-issues-in-yahoo-mail-mobile-email/
-            		*/
-            		@media only screen and (max-device-width: 480px) {
-
-            			/* A nice and clean way to target phone numbers you want clickable and avoid a mobile phone from linking other numbers that look like, but are not phone numbers.  Use these two blocks of code to 'unstyle' any numbers that may be linked.  The second block gives you a class to apply with a span tag to the numbers you would like linked and styled.
-
-            			Inspired by Campaign Monitor's article on using phone numbers in email: http://www.campaignmonitor.com/blog/post/3571/using-phone-numbers-in-html-email/.
-
-            			Step 1 (Step 2: line 224)
-            			*/
-            			a[href^='tel'], a[href^='sms'] {
-            						text-decoration: none;
-            						color: black; /* or whatever your want */
-            						pointer-events: none;
-            						cursor: default;
-            					}
-
-            			.mobile_link a[href^='tel'], .mobile_link a[href^='sms'] {
-            						text-decoration: default;
-            						color: orange !important; /* or whatever your want */
-            						pointer-events: auto;
-            						cursor: default;
-            					}
-            		}
-
-            		/* More Specific Targeting */
-
-            		@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-            			/* You guessed it, ipad (tablets, smaller screens, etc) */
-
-            			/* Step 1a: Repeating for the iPad */
-            			a[href^='tel'], a[href^='sms'] {
-            						text-decoration: none;
-            						color: blue; /* or whatever your want */
-            						pointer-events: none;
-            						cursor: default;
-            					}
-
-            			.mobile_link a[href^='tel'], .mobile_link a[href^='sms'] {
-            						text-decoration: default;
-            						color: orange !important;
-            						pointer-events: auto;
-            						cursor: default;
-            					}
-            		}
-
-            		@media only screen and (-webkit-min-device-pixel-ratio: 2) {
-            			/* Put your iPhone 4g styles in here */
-            		}
-
-            		/* Following Android targeting from:
-            		http://developer.android.com/guide/webapps/targeting.html
-            		http://pugetworks.com/2011/04/css-media-queries-for-targeting-different-mobile-devices/  */
-            		@media only screen and (-webkit-device-pixel-ratio:.75){
-            			/* Put CSS for low density (ldpi) Android layouts in here */
-            		}
-            		@media only screen and (-webkit-device-pixel-ratio:1){
-            			/* Put CSS for medium density (mdpi) Android layouts in here */
-            		}
-            		@media only screen and (-webkit-device-pixel-ratio:1.5){
-            			/* Put CSS for high density (hdpi) Android layouts in here */
-            		}
-            		/* end Android targeting */
-            	</style>
-
-            	<!-- Targeting Windows Mobile -->
-            	<!--[if IEMobile 7]>
-            	<style type='text/css'>
-
-            	</style>
-            	<![endif]-->
-
-            	<!-- ***********************************************
-            	****************************************************
-            	END MOBILE TARGETING
-            	****************************************************
-            	************************************************ -->
-
-            	<!--[if gte mso 9]>
+            	<meta name='viewport' content='width=device-width'/>
             	<style>
-            		/* Target Outlook 2007 and 2010 */
-            	</style>
-            	<![endif]-->
+            /**********************************************
+            * Ink v1.0.5 - Copyright 2013 ZURB Inc        *
+            **********************************************/
+
+            /* Client-specific Styles & Reset */
+
+            #outlook a { 
+              padding:0; 
+            } 
+
+            body{ 
+              width:100% !important; 
+              min-width: 100%;
+              -webkit-text-size-adjust:100%; 
+              -ms-text-size-adjust:100%; 
+              margin:0; 
+              padding:0;
+            }
+
+            .ExternalClass { 
+              width:100%;
+            } 
+
+            .ExternalClass, 
+            .ExternalClass p, 
+            .ExternalClass span, 
+            .ExternalClass font, 
+            .ExternalClass td, 
+            .ExternalClass div { 
+              line-height: 100%; 
+            } 
+
+            #backgroundTable { 
+              margin:0; 
+              padding:0; 
+              width:100% !important; 
+              line-height: 100% !important; 
+            }
+
+            img { 
+              outline:none; 
+              text-decoration:none; 
+              -ms-interpolation-mode: bicubic;
+              width: auto;
+              max-width: 100%; 
+              float: left; 
+              clear: both; 
+              display: block;
+            }
+
+            center {
+              width: 100%;
+              min-width: 580px;
+            }
+
+            a img { 
+              border: none;
+            }
+
+            p {
+              margin: 0 0 0 10px;
+            }
+
+            table {
+              border-spacing: 0;
+              border-collapse: collapse;
+            }
+
+            td { 
+              word-break: break-word;
+              -webkit-hyphens: auto;
+              -moz-hyphens: auto;
+              hyphens: auto;
+              border-collapse: collapse !important; 
+            }
+
+            table, tr, td {
+              padding: 0;
+              vertical-align: top;
+              text-align: left;
+            }
+
+            hr {
+              color: #d9d9d9; 
+              background-color: #d9d9d9; 
+              height: 1px; 
+              border: none;
+            }
+
+            /* Responsive Grid */
+
+            table.body {
+              height: 100%;
+              width: 100%;
+            }
+
+            table.container {
+              width: 580px;
+              margin: 0 auto;
+              text-align: inherit;
+            }
+
+            table.row { 
+              padding: 0px; 
+              width: 100%;
+              position: relative;
+            }
+
+            table.container table.row {
+              display: block;
+            }
+
+            td.wrapper {
+              padding: 10px 20px 0px 0px;
+              position: relative;
+            }
+
+            table.columns,
+            table.column {
+              margin: 0 auto;
+            }
+
+            table.columns td,
+            table.column td {
+              padding: 0px 0px 10px; 
+            }
+
+            table.columns td.sub-columns,
+            table.column td.sub-columns,
+            table.columns td.sub-column,
+            table.column td.sub-column {
+              padding-right: 10px;
+            }
+
+            td.sub-column, td.sub-columns {
+              min-width: 0px;
+            }
+
+            table.row td.last,
+            table.container td.last {
+              padding-right: 0px;
+            }
+
+            table.one { width: 30px; }
+            table.two { width: 80px; }
+            table.three { width: 130px; }
+            table.four { width: 180px; }
+            table.five { width: 230px; }
+            table.six { width: 280px; }
+            table.seven { width: 330px; }
+            table.eight { width: 380px; }
+            table.nine { width: 430px; }
+            table.ten { width: 480px; }
+            table.eleven { width: 530px; }
+            table.twelve { width: 580px; }
+
+            table.one center { min-width: 30px; }
+            table.two center { min-width: 80px; }
+            table.three center { min-width: 130px; }
+            table.four center { min-width: 180px; }
+            table.five center { min-width: 230px; }
+            table.six center { min-width: 280px; }
+            table.seven center { min-width: 330px; }
+            table.eight center { min-width: 380px; }
+            table.nine center { min-width: 430px; }
+            table.ten center { min-width: 480px; }
+            table.eleven center { min-width: 530px; }
+            table.twelve center { min-width: 580px; }
+
+            table.one .panel center { min-width: 10px; }
+            table.two .panel center { min-width: 60px; }
+            table.three .panel center { min-width: 110px; }
+            table.four .panel center { min-width: 160px; }
+            table.five .panel center { min-width: 210px; }
+            table.six .panel center { min-width: 260px; }
+            table.seven .panel center { min-width: 310px; }
+            table.eight .panel center { min-width: 360px; }
+            table.nine .panel center { min-width: 410px; }
+            table.ten .panel center { min-width: 460px; }
+            table.eleven .panel center { min-width: 510px; }
+            table.twelve .panel center { min-width: 560px; }
+
+            .body .columns td.one,
+            .body .column td.one { width: 8.333333%; }
+            .body .columns td.two,
+            .body .column td.two { width: 16.666666%; }
+            .body .columns td.three,
+            .body .column td.three { width: 25%; }
+            .body .columns td.four,
+            .body .column td.four { width: 33.333333%; }
+            .body .columns td.five,
+            .body .column td.five { width: 41.666666%; }
+            .body .columns td.six,
+            .body .column td.six { width: 50%; }
+            .body .columns td.seven,
+            .body .column td.seven { width: 58.333333%; }
+            .body .columns td.eight,
+            .body .column td.eight { width: 66.666666%; }
+            .body .columns td.nine,
+            .body .column td.nine { width: 75%; }
+            .body .columns td.ten,
+            .body .column td.ten { width: 83.333333%; }
+            .body .columns td.eleven,
+            .body .column td.eleven { width: 91.666666%; }
+            .body .columns td.twelve,
+            .body .column td.twelve { width: 100%; }
+
+            td.offset-by-one { padding-left: 50px; }
+            td.offset-by-two { padding-left: 100px; }
+            td.offset-by-three { padding-left: 150px; }
+            td.offset-by-four { padding-left: 200px; }
+            td.offset-by-five { padding-left: 250px; }
+            td.offset-by-six { padding-left: 300px; }
+            td.offset-by-seven { padding-left: 350px; }
+            td.offset-by-eight { padding-left: 400px; }
+            td.offset-by-nine { padding-left: 450px; }
+            td.offset-by-ten { padding-left: 500px; }
+            td.offset-by-eleven { padding-left: 550px; }
+
+            td.expander {
+              visibility: hidden;
+              width: 0px;
+              padding: 0 !important;
+            }
+
+            table.columns .text-pad,
+            table.column .text-pad {
+              padding-left: 10px;
+              padding-right: 10px;
+            }
+
+            table.columns .left-text-pad,
+            table.columns .text-pad-left,
+            table.column .left-text-pad,
+            table.column .text-pad-left {
+              padding-left: 10px;
+            }
+
+            table.columns .right-text-pad,
+            table.columns .text-pad-right,
+            table.column .right-text-pad,
+            table.column .text-pad-right {
+              padding-right: 10px;
+            }
+
+            /* Block Grid */
+
+            .block-grid {
+              width: 100%;
+              max-width: 580px;
+            }
+
+            .block-grid td {
+              display: inline-block;
+              padding:10px;
+            }
+
+            .two-up td {
+              width:270px;
+            }
+
+            .three-up td {
+              width:173px;
+            }
+
+            .four-up td {
+              width:125px;
+            }
+
+            .five-up td {
+              width:96px;
+            }
+
+            .six-up td {
+              width:76px;
+            }
+
+            .seven-up td {
+              width:62px;
+            }
+
+            .eight-up td {
+              width:52px;
+            }
+
+            /* Alignment & Visibility Classes */
+
+            table.center, td.center {
+              text-align: center;
+            }
+
+            h1.center,
+            h2.center,
+            h3.center,
+            h4.center,
+            h5.center,
+            h6.center {
+              text-align: center;
+            }
+
+            span.center {
+              display: block;
+              width: 100%;
+              text-align: center;
+            }
+
+            img.center {
+              margin: 0 auto;
+              float: none;
+            }
+
+            .show-for-small,
+            .hide-for-desktop {
+              display: none;
+            }
+
+            /* Typography */
+
+            body, table.body, h1, h2, h3, h4, h5, h6, p, td { 
+              color: #222222;
+              font-family: 'Helvetica', 'Arial', sans-serif; 
+              font-weight: normal; 
+              padding:0; 
+              margin: 0;
+              text-align: left; 
+              line-height: 1.3;
+            }
+
+            h1, h2, h3, h4, h5, h6 {
+              word-break: normal;
+            }
+
+            h1 {font-size: 40px;}
+            h2 {font-size: 36px;}
+            h3 {font-size: 32px;}
+            h4 {font-size: 28px;}
+            h5 {font-size: 24px;}
+            h6 {font-size: 20px;}
+            body, table.body, p, td {font-size: 14px;line-height:19px;}
+
+            p.lead, p.lede, p.leed {
+              font-size: 18px;
+              line-height:21px;
+            }
+
+            p { 
+              margin-bottom: 10px;
+            }
+
+            small {
+              font-size: 10px;
+            }
+
+            a {
+              color: #2ba6cb; 
+              text-decoration: none;
+            }
+
+            a:hover { 
+              color: #2795b6 !important;
+            }
+
+            a:active { 
+              color: #2795b6 !important;
+            }
+
+            a:visited { 
+              color: #2ba6cb !important;
+            }
+
+            h1 a, 
+            h2 a, 
+            h3 a, 
+            h4 a, 
+            h5 a, 
+            h6 a {
+              color: #2ba6cb;
+            }
+
+            h1 a:active, 
+            h2 a:active,  
+            h3 a:active, 
+            h4 a:active, 
+            h5 a:active, 
+            h6 a:active { 
+              color: #2ba6cb !important; 
+            } 
+
+            h1 a:visited, 
+            h2 a:visited,  
+            h3 a:visited, 
+            h4 a:visited, 
+            h5 a:visited, 
+            h6 a:visited { 
+              color: #2ba6cb !important; 
+            } 
+
+            /* Panels */
+
+            .panel {
+              background: #f2f2f2;
+              border: 1px solid #d9d9d9;
+              padding: 10px !important;
+            }
+
+            .sub-grid table {
+              width: 100%;
+            }
+
+            .sub-grid td.sub-columns {
+              padding-bottom: 0;
+            }
+
+            /* Buttons */
+
+            table.button,
+            table.tiny-button,
+            table.small-button,
+            table.medium-button,
+            table.large-button {
+              width: 100%;
+              overflow: hidden;
+            }
+
+            table.button td,
+            table.tiny-button td,
+            table.small-button td,
+            table.medium-button td,
+            table.large-button td {
+              display: block;
+              width: auto !important;
+              text-align: center;
+              background: #2ba6cb;
+              border: 1px solid #2284a1;
+              color: #ffffff;
+              padding: 8px 0;
+            }
+
+            table.tiny-button td {
+              padding: 5px 0 4px;
+            }
+
+            table.small-button td {
+              padding: 8px 0 7px;
+            }
+
+            table.medium-button td {
+              padding: 12px 0 10px;
+            }
+
+            table.large-button td {
+              padding: 21px 0 18px;
+            }
+
+            table.button td a,
+            table.tiny-button td a,
+            table.small-button td a,
+            table.medium-button td a,
+            table.large-button td a {
+              font-weight: bold;
+              text-decoration: none;
+              font-family: Helvetica, Arial, sans-serif;
+              color: #ffffff;
+              font-size: 16px;
+            }
+
+            table.tiny-button td a {
+              font-size: 12px;
+              font-weight: normal;
+            }
+
+            table.small-button td a {
+              font-size: 16px;
+            }
+
+            table.medium-button td a {
+              font-size: 20px;
+            }
+
+            table.large-button td a {
+              font-size: 24px;
+            }
+
+            table.button:hover td,
+            table.button:visited td,
+            table.button:active td {
+              background: #2795b6 !important;
+            }
+
+            table.button:hover td a,
+            table.button:visited td a,
+            table.button:active td a {
+              color: #fff !important;
+            }
+
+            table.button:hover td,
+            table.tiny-button:hover td,
+            table.small-button:hover td,
+            table.medium-button:hover td,
+            table.large-button:hover td {
+              background: #2795b6 !important;
+            }
+
+            table.button:hover td a,
+            table.button:active td a,
+            table.button td a:visited,
+            table.tiny-button:hover td a,
+            table.tiny-button:active td a,
+            table.tiny-button td a:visited,
+            table.small-button:hover td a,
+            table.small-button:active td a,
+            table.small-button td a:visited,
+            table.medium-button:hover td a,
+            table.medium-button:active td a,
+            table.medium-button td a:visited,
+            table.large-button:hover td a,
+            table.large-button:active td a,
+            table.large-button td a:visited {
+              color: #ffffff !important; 
+            }
+
+            table.secondary td {
+              background: #e9e9e9;
+              border-color: #d0d0d0;
+              color: #555;
+            }
+
+            table.secondary td a {
+              color: #555;
+            }
+
+            table.secondary:hover td {
+              background: #d0d0d0 !important;
+              color: #555;
+            }
+
+            table.secondary:hover td a,
+            table.secondary td a:visited,
+            table.secondary:active td a {
+              color: #555 !important;
+            }
+
+            table.success td {
+              background: #5da423;
+              border-color: #457a1a;
+            }
+
+            table.success:hover td {
+              background: #457a1a !important;
+            }
+
+            table.alert td {
+              background: #c60f13;
+              border-color: #970b0e;
+            }
+
+            table.alert:hover td {
+              background: #970b0e !important;
+            }
+
+            table.radius td {
+              -webkit-border-radius: 3px;
+              -moz-border-radius: 3px;
+              border-radius: 3px;
+            }
+
+            table.round td {
+              -webkit-border-radius: 500px;
+              -moz-border-radius: 500px;
+              border-radius: 500px;
+            }
+
+            /* Outlook First */
+
+            body.outlook p {
+              display: inline !important;
+            }
+
+            /*  Media Queries */
+
+            @media only screen and (max-width: 600px) {
+
+              table[class='body'] img {
+                width: auto !important;
+                height: auto !important;
+              }
+
+              table[class='body'] center {
+                min-width: 0 !important;
+              }
+
+              table[class='body'] .container {
+                width: 95% !important;
+              }
+
+              table[class='body'] .row {
+                width: 100% !important;
+                display: block !important;
+              }
+
+              table[class='body'] .wrapper {
+                display: block !important;
+                padding-right: 0 !important;
+              }
+
+              table[class='body'] .columns,
+              table[class='body'] .column {
+                table-layout: fixed !important;
+                float: none !important;
+                width: 100% !important;
+                padding-right: 0px !important;
+                padding-left: 0px !important;
+                display: block !important;
+              }
+
+              table[class='body'] .wrapper.first .columns,
+              table[class='body'] .wrapper.first .column {
+                display: table !important;
+              }
+
+              table[class='body'] table.columns td,
+              table[class='body'] table.column td {
+                width: 100% !important;
+              }
+
+              table[class='body'] .columns td.one,
+              table[class='body'] .column td.one { width: 8.333333% !important; }
+              table[class='body'] .columns td.two,
+              table[class='body'] .column td.two { width: 16.666666% !important; }
+              table[class='body'] .columns td.three,
+              table[class='body'] .column td.three { width: 25% !important; }
+              table[class='body'] .columns td.four,
+              table[class='body'] .column td.four { width: 33.333333% !important; }
+              table[class='body'] .columns td.five,
+              table[class='body'] .column td.five { width: 41.666666% !important; }
+              table[class='body'] .columns td.six,
+              table[class='body'] .column td.six { width: 50% !important; }
+              table[class='body'] .columns td.seven,
+              table[class='body'] .column td.seven { width: 58.333333% !important; }
+              table[class='body'] .columns td.eight,
+              table[class='body'] .column td.eight { width: 66.666666% !important; }
+              table[class='body'] .columns td.nine,
+              table[class='body'] .column td.nine { width: 75% !important; }
+              table[class='body'] .columns td.ten,
+              table[class='body'] .column td.ten { width: 83.333333% !important; }
+              table[class='body'] .columns td.eleven,
+              table[class='body'] .column td.eleven { width: 91.666666% !important; }
+              table[class='body'] .columns td.twelve,
+              table[class='body'] .column td.twelve { width: 100% !important; }
+
+              table[class='body'] td.offset-by-one,
+              table[class='body'] td.offset-by-two,
+              table[class='body'] td.offset-by-three,
+              table[class='body'] td.offset-by-four,
+              table[class='body'] td.offset-by-five,
+              table[class='body'] td.offset-by-six,
+              table[class='body'] td.offset-by-seven,
+              table[class='body'] td.offset-by-eight,
+              table[class='body'] td.offset-by-nine,
+              table[class='body'] td.offset-by-ten,
+              table[class='body'] td.offset-by-eleven {
+                padding-left: 0 !important;
+              }
+
+              table[class='body'] table.columns td.expander {
+                width: 1px !important;
+              }
+
+              table[class='body'] .right-text-pad,
+              table[class='body'] .text-pad-right {
+                padding-left: 10px !important;
+              }
+
+              table[class='body'] .left-text-pad,
+              table[class='body'] .text-pad-left {
+                padding-right: 10px !important;
+              }
+
+              table[class='body'] .hide-for-small,
+              table[class='body'] .show-for-desktop {
+                display: none !important;
+              }
+
+              table[class='body'] .show-for-small,
+              table[class='body'] .hide-for-desktop {
+                display: inherit !important;
+              }
+            }
+
+              </style>
+              <style>
+
+                table.facebook td {
+                  background: #3b5998;
+                  border-color: #2d4473;
+                }
+
+                table.facebook:hover td {
+                  background: #2d4473 !important;
+                }
+
+                table.twitter td {
+                  background: #00acee;
+                  border-color: #0087bb;
+                }
+
+                table.twitter:hover td {
+                  background: #0087bb !important;
+                }
+
+                table.google-plus td {
+                  background-color: #DB4A39;
+                  border-color: #CC0000;
+                }
+
+                table.google-plus:hover td {
+                  background: #CC0000 !important;
+                }
+
+                .template-label {
+                  color: #ffffff;
+                  font-weight: bold;
+                  font-size: 11px;
+                }
+
+                .callout .panel {
+                  background: #ECF8FF;
+                  border-color: #b9e5ff;
+                }
+
+                .header {
+                  background: #999999;
+                }
+
+                .footer .wrapper {
+                  background: #ebebeb;
+                }
+
+                .footer h5 {
+                  padding-bottom: 10px;
+                }
+
+                table.columns .text-pad {
+                  padding-left: 10px;
+                  padding-right: 10px;
+                }
+
+                table.columns .left-text-pad {
+                  padding-left: 10px;
+                }
+
+                table.columns .right-text-pad {
+                  padding-right: 10px;
+                }
+
+                @media only screen and (max-width: 600px) {
+
+                  table[class='body'] .right-text-pad {
+                    padding-left: 10px !important;
+                  }
+
+                  table[class='body'] .left-text-pad {
+                    padding-right: 10px !important;
+                  }
+                }
+
+              </style>
             </head>
             <body>
-            	<!-- Wrapper/Container Table: Use a wrapper table to control the width and the background color consistently of your email. Use this approach instead of setting attributes on the body tag. -->
-            	<table cellpadding='0' cellspacing='0' border='0' id='backgroundTable'>
-            	<tr>
-            		<td>
-
-            		<!-- Tables are the most common way to format your email consistently. Set your table widths inside cells and in most cases reset cellpadding, cellspacing, and border to zero. Use nested tables as a way to space effectively in your message. -->
-            		<table cellpadding='0' cellspacing='0' border='0' align='center'>
-            			<tr>
-            				<td width='400' valign='top'>
-            					<img class='image_fix' style='margin-top: 10px;' src='$img'>
-            					<p style='font-family: Helvetica, Arial, Sans-Serif; color: #888; font-size: 12px;'>This image is from <a href='https://www.flickr.com/photos/schlesinger_library/15054903733/' target ='_blank'>Schlesinger Library on the History of Women in America</a></p>
-            				</td>
-            				<td width='300' valign='top'>
-            					<p style='color: #333; text-decoration: none; font-family: Helvetica, Arial, Sans-Serif; font-size: 40px; line-height: 40px; margin-top: 10px;'>Happy holidays</p>
-            					<p style='font-family: Helvetica, Arial, Sans-Serif; font-size: 18px; color: #555; line-height: 20px;'>
-            						The message that the sender typed in goes here the message that the sender typed in goes here the message that the sender typed in goes here the message that the sender typed in goes here 
-            					</p>
-            					<p style='font-family: Helvetica, Arial, Sans-Serif; font-size: 18px; color: #555; line-height: 20px;'>The from name or email address here</p>
-            				</td>
-            			</tr>
-
-            		</table>
-
-            		<!-- Gmail/Hotmail image display fix: Gmail and Hotmail unwantedly adds in an extra space below images when using non IE browsers.  This can be especially painful when you putting images on top of each other or putting back together an image you spliced for formatting reasons.  Either way, you can add the 'image_fix' class to remove that space below the image.  Make sure to set alignment (don't use float) on your images if you are placing them inline with text.-->
+            	<table class='body'>
+            		<tr>
+            			<td class='center' align='center' valign='top'>
+                    <center>
 
 
-            		</td>
-            	</tr>
+            				 <br>
+
+                      <table class='container'>
+                        <tr>
+                          <td>
+
+                          <!-- content start -->
+
+                            <table class='row'>
+                              <tr>
+                                <td class='wrapper'>
+
+                                  <table class='six columns'>
+                                    <tr>
+                                      <td>
+                                        <h2>Hello,<br> Han Fastolfe</h2>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et.</p>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et. Lorem ipsum dolor sit amet.</p>
+                                      </td>
+                                      <td class='expander'></td>
+                                    </tr>
+                                  </table>
+
+
+                                </td>
+                                <td class='wrapper last'>
+
+                                  <br>
+
+                                  <table class='six columns'>
+                                    <tr>
+                                      <td class='panel'>
+                                        <h6 style='margin-bottom:5px;'>Connect With Us:</h6>
+
+
+                                        <hr>
+
+            							<img class='image_fix' style='margin-top: 10px;' src='$img'>
+                                        <table class='tiny-button twitter'>
+                                          <tr>
+                                            <td>
+                                              <a href='#'>Twitter</a>
+                                            </td>
+                                          </tr>
+                                        </table>
+
+                                        <hr>
+                                        <h6 style='margin-bottom:5px;'>Contact Info:</h6>
+                                        <p>Phone: <b>408.341.0600</b></p>
+                                        <p>Email: <a href='mailto:hseldon@trantor.com'>hseldon@trantor.com</a></p>
+                                      </td>
+                                      <td class='expander'></td>
+                                    </tr>
+                                  </table>
+
+                                </td>
+                              </tr>
+                            </table>
+                            <br>
+                            <br>
+                            <!-- Legal + Unsubscribe -->
+                            <table class='row'>
+                              <tr>
+                                <td class='wrapper last'>
+
+                                  <table class='twelve columns'>
+                                    <tr>
+                                      <td align='center'>
+                                        <center>
+                                          <p style='text-align:center;'><a href='#'>Terms</a> | <a href='#'>Privacy</a> | <a href='#'>Unsubscribe</a></p>
+                                        </center>
+                                      </td>
+                                      <td class='expander'></td>
+                                    </tr>
+                                  </table>
+
+                                </td>
+                              </tr>
+                            </table>
+
+                          <!-- container end below -->
+                          </td>
+                        </tr>
+                      </table>
+
+                    </center>
+            			</td>
+            		</tr>
             	</table>
-            	<!-- End of wrapper table -->
             </body>
-            </html>";
+            </html>
+        ";
 
         // To send HTML mail, the Content-type header must be set
         $headers  = "MIME-Version: 1.0" . "\r\n";
