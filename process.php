@@ -818,7 +818,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                   <table class='six columns'>
                                     <tr>
                                       <td>
-                                        <img src='$img' style='min-width: 330px;'>
+                                        <img src='$img' width=330>
                                         <br>
                                         <a href='$creditLink'>$creditName</a>
                                       </td>
