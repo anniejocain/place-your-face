@@ -611,7 +611,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             @media only screen and (max-width: 600px) {
 
               table[class='body'] img {
-                width: auto !important;
+                width: 100% !important;
                 height: auto !important;
               }
 
