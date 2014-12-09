@@ -1,5 +1,6 @@
 $(document).ready(function() {
     var backgroundColor = "grayscale";
+    var imgDataUrl = '';
       function update(activeAnchor) {
         var group = activeAnchor.getParent();
 
@@ -137,7 +138,6 @@ $(document).ready(function() {
             darthVaderGroup.moveToTop();
             yodaGroup.find('.image')[0].opacity(1);
             var backgroundImage = darthVaderGroup.find('.image')[0];
-            console.log(backgroundImage.getWidth())
             yodaGroup.find('.image')[0].cache();
             if(backgroundColor === 'sepia') {
                 yodaGroup.find('.image')[0].filters([Kinetic.Filters.Sepia]);
@@ -181,8 +181,9 @@ $(document).ready(function() {
                     });
                     }
                     finished_img.src = dataUrl;
+                    imgDataUrl = dataUrl;
                     $('.write-message').fadeIn();
-                    $.scrollTo('.write-message', 800);
+                    $.scrollTo('+=850px', 800);
                 }
             });
         }
@@ -317,6 +318,18 @@ $(document).ready(function() {
         addImage(src);
     });
     $('#insert-form').on('submit', function (e) {
+        e.preventDefault();
+    });
+    $('#send-form').on('submit', function (e) {
+        $.ajax({
+        url: 'process.php',
+        type: 'POST',
+        data: {img: imgDataUrl, toEmail: $('#toEmail').val(), fromEmail: $('#fromEmail').val(), message: $('#messageText').val()},
+        success: function(data){
+            $('.message-sent').fadeIn();
+           console.log(data); 
+        }
+    });
         e.preventDefault();
     });
   
