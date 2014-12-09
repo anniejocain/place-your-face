@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $fromName = $fromEmail;
         
         if (!empty($_POST['fromName'])) {
-            $fromName = $_POST['fromName']);
+            $fromName = $_POST['fromName'];
         }
         
         
