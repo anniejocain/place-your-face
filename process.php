@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $headers .= "From: $fromEmail" . "\r\n";
 
         // Mail it
-        mail($to, $subject, $message, $headers);
+        mail($toEmail, $subject, $message, $headers);
         
         
         
