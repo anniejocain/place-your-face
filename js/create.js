@@ -1,6 +1,8 @@
 $(document).ready(function() {
     var backgroundColor = "grayscale";
     var imgDataUrl = '';
+    var creditName = '';
+    var creditLink = '';
       function update(activeAnchor) {
         var group = activeAnchor.getParent();
 
@@ -303,6 +305,8 @@ $(document).ready(function() {
             $.scrollTo('.insert-face', 800);
             var src = $(this).data('src');
             $('.attribution-link').text($(this).data('attribution'));
+            creditName = $(this).data('attribution');
+            creditLink = $(this).data('link')
             $('.attribution-link').attr('href', $(this).data('link'));
             backgroundColor = $(this).data('color');
             addBackground(src);
@@ -327,10 +331,9 @@ $(document).ready(function() {
         $.ajax({
         url: 'process.php',
         type: 'POST',
-        data: {img: imgDataUrl, toEmail: $('#toEmail').val(), fromEmail: $('#fromEmail').val(), message: $('#messageText').val()},
+        data: {img: imgDataUrl, toEmail: $('#toEmail').val(), fromEmail: $('#fromEmail').val(), message: $('#messageText').val(), fromName: $('#fromName').val(), creditName:creditName, creditLink:creditLink},
         success: function(data){
             $('.message-sent').fadeIn();
-           console.log(data); 
         }
     });
         e.preventDefault();
