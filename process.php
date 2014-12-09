@@ -1,11 +1,22 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    if(!empty($_POST['img']) && !empty($_POST['toEmail'])) {
+    if(!empty($_POST['img']) && !empty($_POST['toEmail']) && !empty($_POST['fromEmail']) && !empty($_POST['greeting']) && !empty($_POST['message']) && !empty($_POST['creditName']) && !empty($_POST['creditLink'])) {
         $img = $_POST['img'];
         $toEmail = $_POST['toEmail'];
         $fromEmail = $_POST['fromEmail'];
-
+        $greeting = $_POST['greeting'];
+        $message = $_POST['message'];
+        $creditName = $_POST['creditName'];
+        $creditLink = $_POST['creditLink'];
+        
+        $fromName = $fromEmail;
+        
+        if (!empty($_POST['fromName'])) {
+            $fromName = $_POST['fromName']);
+        }
+        
+        
         // subject
         $subject = 'holiday greeting message here';
 
@@ -808,8 +819,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <tr>
                                       <td>
                                         <h2>Hello,<br> Han Fastolfe</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et.</p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et. Lorem ipsum dolor sit amet.</p>
+                                        <img class='image_fix' style='margin-top: 10px;' src='$img'>
+                                        <br>
+                                        <a href='$creditLink'>$creditName</a>
                                       </td>
                                       <td class='expander'></td>
                                     </tr>
@@ -824,24 +836,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                   <table class='six columns'>
                                     <tr>
                                       <td class='panel'>
-                                        <h6 style='margin-bottom:5px;'>Connect With Us:</h6>
-
-
-                                        <hr>
-
-            							<img class='image_fix' style='margin-top: 10px;' src='$img'>
-                                        <table class='tiny-button twitter'>
-                                          <tr>
-                                            <td>
-                                              <a href='#'>Twitter</a>
-                                            </td>
-                                          </tr>
-                                        </table>
-
-                                        <hr>
-                                        <h6 style='margin-bottom:5px;'>Contact Info:</h6>
-                                        <p>Phone: <b>408.341.0600</b></p>
-                                        <p>Email: <a href='mailto:hseldon@trantor.com'>hseldon@trantor.com</a></p>
+                                        <h4 style='margin-bottom:5px;'>$greeting</h4>
+                                        <br>
+                                        <h6 style='margin-bottom:5px;'>Message</h6>
+                                        <p>$message</p>
+                                        <h6 style='margin-bottom:5px;'>From</h6>
+                                        <p>$fromName</p>
+                                        <br>
                                       </td>
                                       <td class='expander'></td>
                                     </tr>
@@ -851,27 +852,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                               </tr>
                             </table>
                             <br>
-                            <br>
-                            <!-- Legal + Unsubscribe -->
-                            <table class='row'>
-                              <tr>
-                                <td class='wrapper last'>
-
-                                  <table class='twelve columns'>
-                                    <tr>
-                                      <td align='center'>
-                                        <center>
-                                          <p style='text-align:center;'><a href='#'>Terms</a> | <a href='#'>Privacy</a> | <a href='#'>Unsubscribe</a></p>
-                                        </center>
-                                      </td>
-                                      <td class='expander'></td>
-                                    </tr>
-                                  </table>
-
-                                </td>
-                              </tr>
-                            </table>
-
                           <!-- container end below -->
                           </td>
                         </tr>
