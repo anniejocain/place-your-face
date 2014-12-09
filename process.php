@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               outline:none; 
               text-decoration:none; 
               -ms-interpolation-mode: bicubic;
-              width: auto;
+              width: 100%;
               max-width: 100%; 
               float: left; 
               clear: both; 
@@ -815,10 +815,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                               <tr>
                                 <td class='wrapper'>
 
-                                  <table class='six columns'>
+                                  <table class='eight columns'>
                                     <tr>
                                       <td>
-                                        <img src='$img' width=330>
+                                        <img src='$img'>
                                         <br>
                                         <a href='$creditLink'>$creditName</a>
                                       </td>
