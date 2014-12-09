@@ -48,7 +48,7 @@ $(document).ready(function() {
         var anchor = new Kinetic.Circle({
           x: x,
           y: y,
-          stroke: '#666',
+          stroke: '#4AA4BE',
           fill: '#ddd',
           strokeWidth: 2,
           radius: 8,
@@ -259,7 +259,6 @@ $(document).ready(function() {
         function addImage(src){
             //$('.insert-section').fadeOut();
             //$('.inserted-section').fadeIn();
-            $.scrollTo('.place-face', 800);
             yodaGroup.removeChildren();
             var imageObj = new Image();
             imageObj.setAttribute('crossOrigin', 'anonymous');
@@ -289,7 +288,11 @@ $(document).ready(function() {
             
                 layer.draw();
                 stage.draw();
+                $.scrollTo('.place-face', 800);
             }  
+            imageObj.onerror = function() {
+                $('.load-error').fadeIn();
+            };
 
             imageObj.src = src;
         }

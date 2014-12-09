@@ -95,6 +95,10 @@ h1, h2 {
 .message-sent {
     margin-top:25px;
 }
+.resize-instructions {
+    margin-left:58px;
+    color:#666;
+}
 </style>
   </head>
   <body>
@@ -150,9 +154,15 @@ h1, h2 {
             <button id="file-online-submit" type="button" class="btn btn-primary">Insert</button>
             </form>
             </div>
+            </div>
+            <div class="row">
+            <div class="col-md-8">
+            <p class="text-danger load-error" style="display:none;">We can't load that image. Sorry. Try another?</p>
+            </div>
           </div>
     <div class="row place-face">
     <h2><span class="badge badge-step">3</span> Place your face in the opening</h2>
+    <p class="resize-instructions">Drag the corner circles to resize</p>
     </div>
     <div id="image-container"></div>
     <div class="row">
