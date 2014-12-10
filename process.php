@@ -871,8 +871,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Mail it
         mail($toEmail, $subject, $message, $headers);
         
-        echo $message;
-        
+
+	define('BASE_DIR', dirname(realpath(__FILE__)));
+	$config = require_once(BASE_DIR . '/config.php');
+
+	// Create connection
+	$conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
+	// Check connection
+	if ($conn->connect_error) {
+	    die("Connection failed: " . $conn->connect_error);
+	} 
+
+        $sql = 'INSERT INTO `images` (file_name) VALUES ("' . $filename . '" )'; 
+
+	if ($conn->query($sql) === TRUE) {
+    		echo "New record created successfully";
+	} else {
+    		echo "Error: " . $sql . "<br>" . $conn->error;
+	}
+
+	$conn->close();
+
+
     }
 }
 
