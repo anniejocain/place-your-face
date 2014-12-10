@@ -808,53 +808,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
               </style>
             </head>
-            <body>
-            	<table class='body'>
-            		<tr>
-            			<td class='center' align='center' valign='top'>
-                    <center>
+            <body style='min-width: 100%;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;margin: 0;padding: 0;color: #222222;font-family: 'Helvetica', 'Arial', sans-serif;font-weight: normal;text-align: left;line-height: 19px;font-size: 14px;width: 100% !important;'>
+            	<table class='body' style='border-spacing: 0;border-collapse: collapse;padding: 0;vertical-align: top;text-align: left;height: 100%;width: 100%;color: #222222;font-family: 'Helvetica', 'Arial', sans-serif;font-weight: normal;margin: 0;line-height: 19px;font-size: 14px;'>
+            		<tr style='padding: 0;vertical-align: top;text-align: left;'>
+            			<td class='center' align='center' valign='top' style='word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;padding: 0;vertical-align: top;text-align: center;color: #222222;font-family: 'Helvetica', 'Arial', sans-serif;font-weight: normal;margin: 0;line-height: 19px;font-size: 14px;border-collapse: collapse !important;'>
+                    <center style='width: 100%;min-width: 580px;'>
 
 
             				 <br>
 
-                      <table class='container'>
-                        <tr>
-                          <td>
+                      <table class='container' style='border-spacing: 0;border-collapse: collapse;padding: 0;vertical-align: top;text-align: inherit;width: 580px;margin: 0 auto;'>
+                        <tr style='padding: 0;vertical-align: top;text-align: left;'>
+                          <td style='word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;padding: 0;vertical-align: top;text-align: left;color: #222222;font-family: 'Helvetica', 'Arial', sans-serif;font-weight: normal;margin: 0;line-height: 19px;font-size: 14px;border-collapse: collapse !important;'>
 
                           <!-- content start -->
 
-                            <table class='row'>
-                              <tr>
-                                <td class='wrapper'>
+                            <table class='row' style='border-spacing: 0;border-collapse: collapse;padding: 0px;vertical-align: top;text-align: left;width: 100%;position: relative;display: block;'>
+                              <tr style='padding: 0;vertical-align: top;text-align: left;'>
+                                <td class='wrapper' style='word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;padding: 10px 20px 0px 0px;vertical-align: top;text-align: left;color: #222222;font-family: 'Helvetica', 'Arial', sans-serif;font-weight: normal;margin: 0;line-height: 19px;font-size: 14px;position: relative;border-collapse: collapse !important;'>
 
-                                  <table class='eight columns'>
-                                    <tr>
-                                      <td>
-                                        <img src='$image_src'>
+                                  <table class='eight columns' style='border-spacing: 0;border-collapse: collapse;padding: 0;vertical-align: top;text-align: left;margin: 0 auto;width: 380px;'>
+                                    <tr style='padding: 0;vertical-align: top;text-align: left;'>
+                                      <td style='word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;padding: 0px 0px 10px;vertical-align: top;text-align: left;color: #222222;font-family: 'Helvetica', 'Arial', sans-serif;font-weight: normal;margin: 0;line-height: 19px;font-size: 14px;border-collapse: collapse !important;'>
+                                        <img src='$image_src' style='outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;width: 100%;max-width: 100%;float: left;clear: both;display: block;'>
                                         <br>
-                                        This image is from <a href='$creditLink'>$creditName</a>
+                                        This image is from <a href='$creditLink' style='color: #2ba6cb;text-decoration: none;'>$creditName</a>
                                       </td>
-                                      <td class='expander'></td>
+                                      <td class='expander' style='word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;padding: 0 !important;vertical-align: top;text-align: left;color: #222222;font-family: 'Helvetica', 'Arial', sans-serif;font-weight: normal;margin: 0;line-height: 19px;font-size: 14px;visibility: hidden;width: 0px;border-collapse: collapse !important;'></td>
                                     </tr>
                                   </table>
 
 
                                 </td>
-                                <td class='wrapper last'>
+                                <td class='wrapper last' style='word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;padding: 10px 20px 0px 0px;vertical-align: top;text-align: left;color: #222222;font-family: 'Helvetica', 'Arial', sans-serif;font-weight: normal;margin: 0;line-height: 19px;font-size: 14px;position: relative;padding-right: 0px;border-collapse: collapse !important;'>
 
                                   <br>
 
-                                  <table class='six columns'>
-                                    <tr>
-                                      <td class='panel'>
-                                        <h4 style='margin-bottom:5px;'>$greeting</h4>
+                                  <table class='six columns' style='border-spacing: 0;border-collapse: collapse;padding: 0;vertical-align: top;text-align: left;margin: 0 auto;width: 280px;'>
+                                    <tr style='padding: 0;vertical-align: top;text-align: left;'>
+                                      <td class='panel' style='word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;padding: 10px !important;vertical-align: top;text-align: left;color: #222222;font-family: 'Helvetica', 'Arial', sans-serif;font-weight: normal;margin: 0;line-height: 19px;font-size: 14px;background: #f2f2f2;border: 1px solid #d9d9d9;border-collapse: collapse !important;'>
+                                        <h4 style='margin-bottom: 5px;color: #222222;font-family: 'Helvetica', 'Arial', sans-serif;font-weight: normal;padding: 0;margin: 0;text-align: left;line-height: 1.3;word-break: normal;font-size: 28px;'>$greeting</h4>
                                         <br>
-                                        <p>$message</p>
-                                        <h6 style='margin-bottom:5px;'>From</h6>
-                                        <p>$fromName</p>
+                                        <p style='margin: 0;margin-bottom: 10px;color: #222222;font-family: 'Helvetica', 'Arial', sans-serif;font-weight: normal;padding: 0;text-align: left;line-height: 19px;font-size: 14px;'>$message</p>
+                                        <h6 style='margin-bottom: 5px;color: #222222;font-family: 'Helvetica', 'Arial', sans-serif;font-weight: normal;padding: 0;margin: 0;text-align: left;line-height: 1.3;word-break: normal;font-size: 20px;'>From</h6>
+                                        <p style='margin: 0;margin-bottom: 10px;color: #222222;font-family: 'Helvetica', 'Arial', sans-serif;font-weight: normal;padding: 0;text-align: left;line-height: 19px;font-size: 14px;'>$fromName</p>
                                         <br>
                                       </td>
-                                      <td class='expander'></td>
+                                      <td class='expander' style='word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;padding: 0 !important;vertical-align: top;text-align: left;color: #222222;font-family: 'Helvetica', 'Arial', sans-serif;font-weight: normal;margin: 0;line-height: 19px;font-size: 14px;visibility: hidden;width: 0px;border-collapse: collapse !important;'></td>
                                     </tr>
                                   </table>
 
