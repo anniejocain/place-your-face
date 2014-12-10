@@ -328,11 +328,14 @@ $(document).ready(function() {
         e.preventDefault();
     });
     $('#send-form').on('submit', function (e) {
+        
+        var gallery_optin = $('#optIn').is(':checked');
+        
         $.ajax({
         url: 'process.php',
         type: 'POST',
-        data: {img: $('#finished').attr('src'), toEmail: $('#toEmail').val(), fromEmail: $('#fromEmail').val(), greeting: $('#greetingText').val(), message: $('#messageText').val(), fromName: $('#fromName').val(), creditName:creditName, creditLink:creditLink},
-        success: function(data){
+        data: {img: $('#finished').attr('src'), toEmail: $('#toEmail').val(), fromEmail: $('#fromEmail').val(), greeting: $('#greetingText').val(), message: $('#messageText').val(), fromName: $('#fromName').val(), creditName:creditName, creditLink:creditLink, optIn:gallery_optin},
+        success: function(data) {
             $('.message-sent').fadeIn();
         }
     });
