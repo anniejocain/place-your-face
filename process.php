@@ -1,11 +1,10 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    if(!empty($_POST['img']) && !empty($_POST['toEmail']) && !empty($_POST['fromEmail']) && !empty($_POST['greeting']) && !empty($_POST['message']) && !empty($_POST['creditName']) && !empty($_POST['creditLink'])) {
+    if(!empty($_POST['img']) && !empty($_POST['toEmail']) && !empty($_POST['fromEmail']) && !empty($_POST['message']) && !empty($_POST['creditName']) && !empty($_POST['creditLink'])) {
         $img = $_POST['img'];
         $toEmail = $_POST['toEmail'];
         $fromEmail = $_POST['fromEmail'];
-        $greeting = $_POST['greeting'];
         $message = $_POST['message'];
         $creditName = $_POST['creditName'];
         $creditLink = $_POST['creditLink'];
@@ -16,9 +15,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $fromName = $_POST['fromName'];
         }
         
+        if (!empty($_POST['greeting'])) {
+            $greeting = $_POST['greeting'];
+        }
+        else {
+            $greeting = "Happy Holidays!";
+        }
+        
         
         // subject
-        $subject = 'holiday greeting message here';
+        $subject = $greeting;
 
         // message
         $message = "
@@ -869,7 +875,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n";
 
         // Additional headers
-        $headers .= "From: $fromEmail" . "\r\n";
+        $headers .= "From: $fromName <$fromEmail> " . "\r\n";
 
         // Mail it
         mail($toEmail, $subject, $message, $headers);
