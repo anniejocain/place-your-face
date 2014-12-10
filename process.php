@@ -890,9 +890,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sql = 'INSERT INTO `images` (file_name) VALUES ("' . $filename . '" )'; 
 
         	if ($conn->query($sql) === TRUE) {
-            		echo "New record created successfully";
+            		//echo "New record created successfully";
         	} else {
-            		echo "Error: " . $sql . "<br>" . $conn->error;
+            		//echo "Error: " . $sql . "<br>" . $conn->error;
         	}
         	
     		$conn->close();
@@ -902,8 +902,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     	$response = array();
         
     	$response['image_src'] = $image_src;
-    	
-    	echo json_encode($response, JSON_PRETTY_PRINT);
+    	echo json_encode($response);
     }
 }
 
