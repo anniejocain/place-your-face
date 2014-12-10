@@ -827,6 +827,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         <img src='$image_src' style='outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;width: 100%;max-width: 100%;float: left;clear: both;display: block;margin-bottom:7px;margin-left:15px;margin-top:5px;'>
                                         <br><br>
                                         <p style='margin-left:15px;'>This image is from <a href='$creditLink' style='color: #4AA4BE;text-decoration: none;'>$creditName</a></p>
+                                        <p style='margin-top:10px;margin-left:15px;font-size:12px;'><a href='http://librarylab.law.harvard.edu/place-your-face/'>Create and send your own card</a></p>
                                       </td>
                                       <td style='word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;padding: 0 !important;vertical-align: top;text-align: left;color: #333333;font-family: Helvetica, Arial, sans-serif;font-weight: normal;margin: 0;line-height: 19px;font-size: 14px;visibility: hidden;width: 0px;border-collapse: collapse !important;'></td>
                                     </tr>

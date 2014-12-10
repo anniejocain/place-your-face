@@ -137,17 +137,36 @@ img {
         <div class="row">
             <div class="col-md-8">
                 <h1>Place your face</h1>
-                <p class="lead">Here are some of the fantastic images that have been created.</p>
+                <p class="lead">Here are some of the fantastic images that have been created. <a href="index.html">Create your own</a></p>
             </div>
         </div>
         <div class="row">
-  <div class="col-md-4"><img src="http://librarylab.law.harvard.edu/place-your-face/images/baby.png"></div>
-  <div class="col-md-4"><img src="http://librarylab.law.harvard.edu/place-your-face/images/sled.png"></div>
-  <div class="col-md-4"><img src="http://librarylab.law.harvard.edu/place-your-face/images/catlady.png"></div>
-    <div class="col-md-4"><img src="http://librarylab.law.harvard.edu/place-your-face/images/cat_close.png"></div>
-  <div class="col-md-4"><img src="http://librarylab.law.harvard.edu/place-your-face/images/catlady.png"></div>
-    <div class="col-md-4"><img src="http://librarylab.law.harvard.edu/place-your-face/images/soldier.png"></div>
-  <div class="col-md-4"><img src="http://librarylab.law.harvard.edu/place-your-face/images/sled.png"></div>
+        <?php
+        define('BASE_DIR', dirname(realpath(__FILE__)));
+	$config = require_once(BASE_DIR . '/config.php');
+
+	// Create connection
+	$conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
+	// Check connection
+	if ($conn->connect_error) {
+	    die("Connection failed: " . $conn->connect_error);
+	} 
+	
+	if ($result = $conn->query("SELECT * from images")) {
+
+while($row = $result->fetch_array())
+  {
+  echo '<div class="col-md-4"><img src="images/cards/' . $row['file_name'] . '"></div>';
+  }
+
+
+
+    /* free result set */
+    $result->close();
+}
+
+	$conn->close();
+	?>
         </div>
             <div id="lil">
      <a href="http://librarylab.law.harvard.edu" target="_blank"><img src="http://librarylab.law.harvard.edu/img/liblabstampmed.png"> Created by the Library Innovation Lab</a>

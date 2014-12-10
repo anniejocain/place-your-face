@@ -1,5 +1,4 @@
 <?php
-
 return array(
         'servername' => 'your mysql server',
         'username' => 'your mysql username',
