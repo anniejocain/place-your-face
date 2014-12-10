@@ -832,7 +832,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                       <td>
                                         <img src='$image_src'>
                                         <br>
-                                        <a href='$creditLink'>$creditName</a>
+                                        This image is from <a href='$creditLink'>$creditName</a>
                                       </td>
                                       <td class='expander'></td>
                                     </tr>
@@ -849,7 +849,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                       <td class='panel'>
                                         <h4 style='margin-bottom:5px;'>$greeting</h4>
                                         <br>
-                                        <h6 style='margin-bottom:5px;'>Message</h6>
                                         <p>$message</p>
                                         <h6 style='margin-bottom:5px;'>From</h6>
                                         <p>$fromName</p>
