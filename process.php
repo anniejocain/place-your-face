@@ -888,9 +888,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sql = 'INSERT INTO `images` (file_name) VALUES ("' . $filename . '" )'; 
 
         	if ($conn->query($sql) === TRUE) {
-            		echo "New record created successfully";
+            		//echo "New record created successfully";
         	} else {
-            		echo "Error: " . $sql . "<br>" . $conn->error;
+            		//echo "Error: " . $sql . "<br>" . $conn->error;
         	}
         	
     		$conn->close();
