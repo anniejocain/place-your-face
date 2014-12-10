@@ -846,7 +846,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                                   <table class='six columns' style='border-spacing: 0;border-collapse: collapse;padding: 0;vertical-align: top;text-align: left;margin: 0 auto;width: 280px;'>
                                     <tr style='padding: 0;vertical-align: top;text-align: left;'>
-                                      <td class='panel' style='word-break: break-word;-webkit-hyphens: auto;-moz-hyphens: auto;hyphens: auto;padding: 10px !important;vertical-align: top;text-align: left;color: #222222;font-family: 'Helvetica', 'Arial', sans-serif;font-weight: normal;margin: 0;line-height: 19px;font-size: 14px;background: #f2f2f2;border: 1px solid #d9d9d9;border-collapse: collapse !important;'>
+                                      <td class='panel' style='padding: 10px !important;vertical-align: top;text-align: left;color: #222222;font-family: 'Helvetica', 'Arial', sans-serif;font-weight: normal;margin: 0;line-height: 19px;font-size: 14px;background: #f2f2f2;border: 1px solid #d9d9d9;'>
                                         <h4 style='margin-bottom: 5px;color: #222222;font-family: 'Helvetica', 'Arial', sans-serif;font-weight: normal;padding: 0;margin: 0;text-align: left;line-height: 1.3;word-break: normal;font-size: 28px;'>$greeting</h4>
                                         <br>
                                         <p style='margin: 0;margin-bottom: 10px;color: #222222;font-family: 'Helvetica', 'Arial', sans-serif;font-weight: normal;padding: 0;text-align: left;line-height: 19px;font-size: 14px;'>$message</p>
@@ -885,7 +885,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Mail it
         mail($toEmail, $subject, $message, $headers);
         
-        
+        echo $message;
         
     }
 }
