@@ -1,13 +1,16 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    if(!empty($_POST['img']) && !empty($_POST['toEmail']) && !empty($_POST['fromEmail']) && !empty($_POST['message']) && !empty($_POST['creditName']) && !empty($_POST['creditLink'])) {
+    if(!empty($_POST['img']) && !empty($_POST['toEmail']) && !empty($_POST['fromEmail']) && !empty($_POST['message']) && !empty($_POST['creditName']) && !empty($_POST['creditLink']) && !empty($_POST['optIn'])) {
         $img = $_POST['img'];
         $toEmail = $_POST['toEmail'];
         $fromEmail = $_POST['fromEmail'];
         $message = $_POST['message'];
         $creditName = $_POST['creditName'];
         $creditLink = $_POST['creditLink'];
+        $optIn = $_POST['optIn'];
+        
+        
         
         $fromName = $fromEmail;
         
@@ -870,29 +873,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Mail it
         mail($toEmail, $subject, $message, $headers);
-        
 
-	define('BASE_DIR', dirname(realpath(__FILE__)));
-	$config = require_once(BASE_DIR . '/config.php');
+        if ($optIn === 'true'){
+        	define('BASE_DIR', dirname(realpath(__FILE__)));
+        	$config = require_once(BASE_DIR . '/config.php');
 
-	// Create connection
-	$conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
-	// Check connection
-	if ($conn->connect_error) {
-	    die("Connection failed: " . $conn->connect_error);
-	} 
+        	// Create connection
+        	$conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
+        	// Check connection
+        	if ($conn->connect_error) {
+        	    die("Connection failed: " . $conn->connect_error);
+        	} 
 
-        $sql = 'INSERT INTO `images` (file_name) VALUES ("' . $filename . '" )'; 
+            $sql = 'INSERT INTO `images` (file_name) VALUES ("' . $filename . '" )'; 
 
-	if ($conn->query($sql) === TRUE) {
-    		echo "New record created successfully";
-	} else {
-    		echo "Error: " . $sql . "<br>" . $conn->error;
-	}
+        	if ($conn->query($sql) === TRUE) {
+            		echo "New record created successfully";
+        	} else {
+            		echo "Error: " . $sql . "<br>" . $conn->error;
+        	}
+    	}
 
 	$conn->close();
-
-
     }
 }
 
