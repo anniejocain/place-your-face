@@ -900,8 +900,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     	$response = array();
         
     	$response['image_src'] = $image_src;
-    	
-    	echo json_encode($response, JSON_PRETTY_PRINT);
+    	echo json_encode($response);
     }
 }
 
