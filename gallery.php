@@ -122,8 +122,14 @@ h1, h2 {
     font-size:13px;
     color:#333;
 }
-.item { width: 25%; }
-.item.w2 { width: 50%; }
+img {
+    max-width:100%;
+    max-height:500px;
+}
+.col-md-4 {
+    height:500px;
+    margin-bottom:25px;
+}
 </style>
   </head>
   <body>
@@ -138,9 +144,9 @@ h1, h2 {
   <div class="col-md-4"><img src="http://librarylab.law.harvard.edu/place-your-face/images/baby.png"></div>
   <div class="col-md-4"><img src="http://librarylab.law.harvard.edu/place-your-face/images/sled.png"></div>
   <div class="col-md-4"><img src="http://librarylab.law.harvard.edu/place-your-face/images/catlady.png"></div>
-    <div class="col-md-4"><img src="http://librarylab.law.harvard.edu/place-your-face/images/sled.png"></div>
+    <div class="col-md-4"><img src="http://librarylab.law.harvard.edu/place-your-face/images/cat_close.png"></div>
   <div class="col-md-4"><img src="http://librarylab.law.harvard.edu/place-your-face/images/catlady.png"></div>
-    <div class="col-md-4"><img src="http://librarylab.law.harvard.edu/place-your-face/images/baby.png"></div>
+    <div class="col-md-4"><img src="http://librarylab.law.harvard.edu/place-your-face/images/soldier.png"></div>
   <div class="col-md-4"><img src="http://librarylab.law.harvard.edu/place-your-face/images/sled.png"></div>
         </div>
             <div id="lil">
