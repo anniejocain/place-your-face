@@ -331,7 +331,7 @@ $(document).ready(function() {
         $.ajax({
         url: 'process.php',
         type: 'POST',
-        data: {img: imgDataUrl, toEmail: $('#toEmail').val(), fromEmail: $('#fromEmail').val(), greeting: $('#greetingText').val(), message: $('#messageText').val(), fromName: $('#fromName').val(), creditName:creditName, creditLink:creditLink},
+        data: {img: $('#finished').attr('src'), toEmail: $('#toEmail').val(), fromEmail: $('#fromEmail').val(), greeting: $('#greetingText').val(), message: $('#messageText').val(), fromName: $('#fromName').val(), creditName:creditName, creditLink:creditLink},
         success: function(data){
             $('.message-sent').fadeIn();
         }

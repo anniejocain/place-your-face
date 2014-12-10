@@ -22,6 +22,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $greeting = "Happy Holidays!";
         }
         
+        $filename = uniqid() . '.png';
+        
+        file_put_contents("images/cards/$filename", file_get_contents($img));
+        
+        $image_src = "http://librarylab.law.harvard.edu/place-your-face/images/cards/$filename";
+        
         
         // subject
         $subject = $greeting;
@@ -824,7 +830,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                   <table class='eight columns'>
                                     <tr>
                                       <td>
-                                        <img src='$img'>
+                                        <img src='$image_src'>
                                         <br>
                                         <a href='$creditLink'>$creditName</a>
                                       </td>
