@@ -336,7 +336,7 @@ $(document).ready(function() {
         type: 'POST',
         data: {img: $('#finished').attr('src'), toEmail: $('#toEmail').val(), fromEmail: $('#fromEmail').val(), greeting: $('#greetingText').val(), message: $('#messageText').val(), fromName: $('#fromName').val(), creditName:creditName, creditLink:creditLink, optIn:gallery_optin},
         success: function(data) {
-            $('#gen_img_src').prop('href', data.image_src);
+            $('#gen_img_src').attr('href', data.image_src);
             $('.message-sent').fadeIn();
             
         }

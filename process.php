@@ -902,6 +902,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     	$response = array();
         
     	$response['image_src'] = $image_src;
+    	header('Content-Type: application/json');
     	echo json_encode($response);
     }
 }
